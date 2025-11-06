@@ -229,7 +229,7 @@ export default function VideoPopover({ isOpen, onClose }: VideoPopoverProps) {
                             onPause={() => setIsPlaying(false)}
                           >
                             <source
-                              src="/how-to-install.mp4"
+                              src="/videos/how-to-install.mp4"
                               type="video/mp4"
                             />
                             Your browser does not support the video tag.
