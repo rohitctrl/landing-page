@@ -1,7 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import PricingPopover from "./pricing-popover";
+import VideoPopover from "./video-popover";
 
 // Inline Button Component
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -146,7 +148,11 @@ const X = ({
 );
 
 // Navigation Component
-const Navigation = React.memo(() => {
+const Navigation = React.memo(({ onPricingClick, onVideoClick, onDownload }: {
+  onPricingClick: () => void;
+  onVideoClick: () => void;
+  onDownload: () => void;
+}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   return (
@@ -171,28 +177,27 @@ const Navigation = React.memo(() => {
             >
               Features
             </a>
-            <a
-              href="#testimonials"
+            <button
+              onClick={onVideoClick}
               className="text-sm text-white/60 hover:text-white transition-colors"
             >
-              Testimonials
-            </a>
-            <a
-              href="#pricing"
+              How to Install
+            </button>
+            <button
+              onClick={onPricingClick}
               className="text-sm text-white/60 hover:text-white transition-colors"
             >
               Pricing
-            </a>
+            </button>
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <a
-              href="/mindmic-ai-voice-transcription.zip"
-              download
+            <button
+              onClick={onDownload}
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-gray-100 h-10 px-5 text-sm"
             >
               7-day free
-            </a>
+            </button>
           </div>
 
           <button
@@ -216,28 +221,31 @@ const Navigation = React.memo(() => {
             >
               Features
             </a>
-            <a
-              href="#testimonials"
-              className="text-sm text-white/60 hover:text-white transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
+            <button
+              className="text-sm text-white/60 hover:text-white transition-colors py-2 text-left w-full"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onVideoClick();
+              }}
             >
-              Testimonials
-            </a>
-            <a
-              href="#pricing"
-              className="text-sm text-white/60 hover:text-white transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
+              How to Install
+            </button>
+            <button
+              className="text-sm text-white/60 hover:text-white transition-colors py-2 text-left w-full"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onPricingClick();
+              }}
             >
               Pricing
-            </a>
+            </button>
             <div className="flex flex-col gap-2 pt-4 border-gray-800/50">
-              <a
-                href="/mindmic-ai-voice-transcription.zip"
-                download
+              <button
+                onClick={onDownload}
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-gray-100 h-10 px-5 text-sm"
               >
                 7-day free
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -249,7 +257,7 @@ const Navigation = React.memo(() => {
 Navigation.displayName = "Navigation";
 
 // Hero Component
-const Hero = React.memo(() => {
+const Hero = React.memo(({ onDownload }: { onDownload: () => void }) => {
   return (
     <section
       className="relative min-h-screen flex flex-col items-center justify-start px-6 py-20 md:py-24"
@@ -329,15 +337,14 @@ const Hero = React.memo(() => {
       </p>
 
       <div className="flex items-center gap-4 relative z-10 mb-16">
-        <a
-          href="/mindmic-ai-voice-transcription.zip"
-          download
+        <button
+          onClick={onDownload}
           className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-b from-white via-white/95 to-white/60 text-black hover:scale-105 active:scale-95 rounded-lg h-12 px-8 text-base"
           aria-label="Download MindMic AI Voice Transcription"
         >
           <Apple size={20} />
           Download now
-        </a>
+        </button>
       </div>
 
       <div className="w-full max-w-5xl relative pb-20">
@@ -375,10 +382,33 @@ Hero.displayName = "Hero";
 
 // Main Component
 export default function Component() {
+  const [isPricingOpen, setIsPricingOpen] = useState(false);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+
+  const handleDownload = () => {
+    // Open the zip file download
+    window.open('/mindmic-ai-voice-transcription.zip', '_blank');
+
+    // Open the install popover after a short delay to ensure download starts
+    setTimeout(() => {
+      setIsVideoOpen(true);
+    }, 500);
+  };
+
   return (
     <main className="min-h-screen bg-black text-white">
-      <Navigation />
-      <Hero />
+      <Navigation
+        onPricingClick={() => setIsPricingOpen(true)}
+        onVideoClick={() => setIsVideoOpen(true)}
+        onDownload={handleDownload}
+      />
+      <Hero onDownload={handleDownload} />
+      <PricingPopover
+        isOpen={isPricingOpen}
+        onClose={() => setIsPricingOpen(false)}
+        onDownload={handleDownload}
+      />
+      <VideoPopover isOpen={isVideoOpen} onClose={() => setIsVideoOpen(false)} />
     </main>
   );
 }
