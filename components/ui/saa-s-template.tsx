@@ -377,17 +377,14 @@ const Hero = React.memo(({ onDownload }: { onDownload: () => void }) => {
             onClick={onDownload}
             className="absolute bottom-16 left-1/2 transform -translate-x-2 px-8 py-3 md:px-10 md:py-4 rounded-lg font-medium transition-all duration-200 z-20"
             style={{
-              background: "rgba(255, 255, 255, 0.15)",
-              backdropFilter: "blur(4px)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
-              color: "#ffffff",
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(255, 255, 255, 0.25)";
               e.currentTarget.style.transform = "translate(calc(-50% - 8px)) scale(1.05)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(255, 255, 255, 0.15)";
               e.currentTarget.style.transform = "translate(calc(-50% - 8px)) scale(1)";
             }}
             aria-label="Download MindMic from video"
