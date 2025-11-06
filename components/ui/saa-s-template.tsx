@@ -324,8 +324,8 @@ const Hero = React.memo(() => {
         className="text-sm md:text-base text-center max-w-2xl px-6 mb-10"
         style={{ color: "#9ca3af" }}
       >
-        Landing page kit template with React, Shadcn/ui and Tailwind <br />
-        that you can copy/paste into your project.
+        Built for makers, thinkers, and creators who move fast.<br />
+        MindMic helps you capture thoughts before they fade.
       </p>
 
       <div className="flex items-center gap-4 relative z-10 mb-16">
