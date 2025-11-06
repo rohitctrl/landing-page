@@ -111,7 +111,7 @@ export default function PricingPopover({ isOpen, onClose, onDownload }: PricingP
           />
 
           {/* Modal */}
-          <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" onClick={onClose}>
+          <div className="fixed inset-0 z-[70] flex items-start md:items-center justify-center p-2 md:p-4 pt-8 md:pt-4" onClick={onClose}>
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -122,11 +122,11 @@ export default function PricingPopover({ isOpen, onClose, onDownload }: PricingP
                 damping: 30,
                 duration: 0.3
               }}
-              className="w-full max-w-6xl h-[90vh] bg-black rounded-2xl border border-gray-800 shadow-2xl"
+              className="w-full max-w-6xl h-[85vh] md:h-[90vh] bg-black rounded-t-2xl md:rounded-2xl border border-gray-800 shadow-2xl overflow-auto md:overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               <div
-                className="h-full mx-auto relative bg-black overflow-hidden rounded-2xl"
+                className="h-full mx-auto relative bg-black overflow-auto md:overflow-hidden rounded-2xl"
                 ref={pricingRef}
               >
                 {/* Background Effects */}
@@ -218,7 +218,7 @@ export default function PricingPopover({ isOpen, onClose, onDownload }: PricingP
                   }}
                 />
 
-                <div className="grid md:grid-cols-3 max-w-5xl gap-4 py-4 px-4 mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-3 max-w-5xl gap-4 py-4 px-4 mx-auto">
                   {plans.map((plan, index) => (
                     <TimelineContent
                       key={plan.name}
