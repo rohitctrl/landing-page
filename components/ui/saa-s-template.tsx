@@ -369,9 +369,31 @@ const Hero = React.memo(({ onDownload }: { onDownload: () => void }) => {
             preload="auto"
             className="w-full h-auto rounded-lg shadow-2xl"
           >
-            <source src="/videos/hero-video.mp4" type="video/mp4" />
+            <source src="/videos/new.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
+          
+          <button
+            onClick={onDownload}
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-6 py-3 md:px-8 md:py-4 rounded-lg font-medium transition-all duration-200 z-20"
+            style={{
+              background: "rgba(255, 255, 255, 0.15)",
+              backdropFilter: "blur(4px)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
+              color: "#ffffff",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(255, 255, 255, 0.25)";
+              e.currentTarget.style.transform = "translate(-50%, -50%) scale(1.05)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(255, 255, 255, 0.15)";
+              e.currentTarget.style.transform = "translate(-50%, -50%) scale(1)";
+            }}
+            aria-label="Download MindMic from video"
+          >
+            <span className="text-sm md:text-base">Get Started</span>
+          </button>
         </div>
       </div>
     </section>
