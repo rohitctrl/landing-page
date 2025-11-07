@@ -3,8 +3,13 @@ import { Resend } from 'resend';
 import fs from 'fs';
 import path from 'path';
 
-// Initialize Resend with your API key
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend only when API key is available
+const getResendClient = () => {
+  if (process.env.RESEND_API_KEY) {
+    return new Resend(process.env.RESEND_API_KEY);
+  }
+  return null;
+};
 
 // Email validation function
 const validateEmail = (email: string) => {
@@ -241,8 +246,13 @@ export async function POST(request: NextRequest) {
 
     // Send welcome email using Resend
     try {
-      const emailData = await resend.emails.create(createWelcomeEmail(email));
-      console.log('Welcome email sent:', emailData);
+      const resendClient = getResendClient();
+      if (resendClient) {
+        const emailData = await resendClient.emails.create(createWelcomeEmail(email));
+        console.log('Welcome email sent:', emailData);
+      } else {
+        console.log('Resend API key not configured - skipping email sending');
+      }
     } catch (emailError) {
       console.error('Failed to send welcome email:', emailError);
       // Continue even if email fails - the user is still registered
