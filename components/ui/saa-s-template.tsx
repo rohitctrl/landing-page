@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import PricingPopover from "./pricing-popover";
 import VideoPopover from "./video-popover";
+import EmailPopover from "./email-popover";
 import { FeaturesPopover } from "./features-popover";
 import { DownloadConfirmationDialog } from "./download-confirmation-dialog";
 import Footer from "./footer";
@@ -151,10 +152,11 @@ const X = ({
 );
 
 // Navigation Component
-const Navigation = React.memo(({ onPricingClick, onVideoClick, onDownload }: {
+const Navigation = React.memo(({ onPricingClick, onVideoClick, onDownload, onEmailClick }: {
   onPricingClick: () => void;
   onVideoClick: () => void;
   onDownload: () => void;
+  onEmailClick: () => void;
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
@@ -189,7 +191,13 @@ const Navigation = React.memo(({ onPricingClick, onVideoClick, onDownload }: {
             </button>
           </div>
 
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
+            <button
+              onClick={onEmailClick}
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-b from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 h-10 px-5 text-sm border border-blue-500/30"
+            >
+              Wanna know more
+            </button>
             <button
               onClick={onDownload}
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-gray-100 h-10 px-5 text-sm"
@@ -234,6 +242,15 @@ const Navigation = React.memo(({ onPricingClick, onVideoClick, onDownload }: {
               Pricing
             </button>
             <div className="flex flex-col gap-2 pt-4 border-gray-800/50">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onEmailClick();
+                }}
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-b from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 h-10 px-5 text-sm border border-blue-500/30"
+              >
+                Wanna know more
+              </button>
               <button
                 onClick={onDownload}
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black hover:bg-gray-100 h-10 px-5 text-sm"
@@ -396,10 +413,15 @@ Hero.displayName = "Hero";
 export default function Component() {
   const [isPricingOpen, setIsPricingOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [isEmailOpen, setIsEmailOpen] = useState(false);
   const [showDownloadConfirm, setShowDownloadConfirm] = useState(false);
 
   const handleDownloadClick = () => {
     setShowDownloadConfirm(true);
+  };
+
+  const handleEmailClick = () => {
+    setIsEmailOpen(true);
   };
 
   const handleConfirmDownload = () => {
@@ -416,6 +438,7 @@ export default function Component() {
         onPricingClick={() => setIsPricingOpen(true)}
         onVideoClick={() => setIsVideoOpen(true)}
         onDownload={handleDownloadClick}
+        onEmailClick={handleEmailClick}
       />
       <Hero onDownload={handleDownloadClick} />
       <PricingPopover
@@ -424,6 +447,7 @@ export default function Component() {
         onDownload={handleDownloadClick}
       />
       <VideoPopover isOpen={isVideoOpen} onClose={() => setIsVideoOpen(false)} />
+      <EmailPopover isOpen={isEmailOpen} onClose={() => setIsEmailOpen(false)} />
       <DownloadConfirmationDialog
         isOpen={showDownloadConfirm}
         onClose={() => setShowDownloadConfirm(false)}
