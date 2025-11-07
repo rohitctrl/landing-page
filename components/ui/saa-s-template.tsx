@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import PricingPopover from "./pricing-popover";
 import VideoPopover from "./video-popover";
+import { FeaturesPopover } from "./features-popover";
 
 // Inline Button Component
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -171,12 +172,7 @@ const Navigation = React.memo(({ onPricingClick, onVideoClick, onDownload }: {
           </div>
 
           <div className="hidden md:flex items-center justify-center gap-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <a
-              href="#features"
-              className="text-sm text-white/60 hover:text-white transition-colors"
-            >
-              Features
-            </a>
+            <FeaturesPopover />
             <button
               onClick={onVideoClick}
               className="text-sm text-white/60 hover:text-white transition-colors"
@@ -214,13 +210,9 @@ const Navigation = React.memo(({ onPricingClick, onVideoClick, onDownload }: {
       {mobileMenuOpen && (
         <div className="md:hidden bg-black/95 backdrop-blur-md border-t border-gray-800/50 animate-[slideDown_0.3s_ease-out]">
           <div className="px-6 py-4 flex flex-col gap-4">
-            <a
-              href="#features"
-              className="text-sm text-white/60 hover:text-white transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Features
-            </a>
+            <div onClick={() => setMobileMenuOpen(false)}>
+              <FeaturesPopover />
+            </div>
             <button
               className="text-sm text-white/60 hover:text-white transition-colors py-2 text-left w-full"
               onClick={() => {
