@@ -5,6 +5,7 @@ import Image from "next/image";
 import PricingPopover from "./pricing-popover";
 import VideoPopover from "./video-popover";
 import { FeaturesPopover } from "./features-popover";
+import { DownloadConfirmationDialog } from "./download-confirmation-dialog";
 
 // Inline Button Component
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -394,12 +395,15 @@ Hero.displayName = "Hero";
 export default function Component() {
   const [isPricingOpen, setIsPricingOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [showDownloadConfirm, setShowDownloadConfirm] = useState(false);
 
-  const handleDownload = () => {
-    // Open the zip file download
+  const handleDownloadClick = () => {
+    setShowDownloadConfirm(true);
+  };
+
+  const handleConfirmDownload = () => {
     window.open('/mindmic.zip', '_blank');
-
-    // Open the install popover after a short delay to ensure download starts
+    
     setTimeout(() => {
       setIsVideoOpen(true);
     }, 500);
@@ -410,15 +414,20 @@ export default function Component() {
       <Navigation
         onPricingClick={() => setIsPricingOpen(true)}
         onVideoClick={() => setIsVideoOpen(true)}
-        onDownload={handleDownload}
+        onDownload={handleDownloadClick}
       />
-      <Hero onDownload={handleDownload} />
+      <Hero onDownload={handleDownloadClick} />
       <PricingPopover
         isOpen={isPricingOpen}
         onClose={() => setIsPricingOpen(false)}
-        onDownload={handleDownload}
+        onDownload={handleDownloadClick}
       />
       <VideoPopover isOpen={isVideoOpen} onClose={() => setIsVideoOpen(false)} />
+      <DownloadConfirmationDialog
+        isOpen={showDownloadConfirm}
+        onClose={() => setShowDownloadConfirm(false)}
+        onConfirm={handleConfirmDownload}
+      />
     </main>
   );
 }
