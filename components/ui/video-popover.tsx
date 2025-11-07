@@ -102,11 +102,11 @@ export default function VideoPopover({ isOpen, onClose }: VideoPopoverProps) {
                 damping: 30,
                 duration: 0.3,
               }}
-              className="w-full max-w-4xl h-[90vh] bg-black rounded-2xl border border-gray-800 shadow-2xl"
+              className="w-full max-w-4xl h-[90vh] bg-black rounded-2xl border border-gray-800 shadow-2xl overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <div
-                className="h-full mx-auto relative bg-black overflow-hidden rounded-2xl"
+                className="min-h-full mx-auto relative bg-black rounded-2xl"
                 ref={videoRef}
               >
                 {/* Background Effects */}
@@ -264,6 +264,131 @@ export default function VideoPopover({ isOpen, onClose }: VideoPopoverProps) {
                           )}
                         </div>
                       </button>
+                    </div>
+                  </TimelineContent>
+                </div>
+
+                {/* Installation Instructions Section */}
+                <div className="px-8 pb-16 relative z-50">
+                  <TimelineContent
+                    as="div"
+                    animationNum={2}
+                    timelineRef={videoRef as React.RefObject<HTMLDivElement>}
+                    customVariants={revealVariants}
+                    className="max-w-4xl mx-auto"
+                  >
+                    <div className="bg-gray-900/50 backdrop-blur-md rounded-xl border border-gray-700/50 p-8 space-y-8">
+                      <h3 className="text-2xl font-semibold text-white mb-6">Step-by-Step Installation Instructions</h3>
+
+                      {/* Step 1 */}
+                      <div className="space-y-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-blue-500/20 border border-blue-500/50 rounded-full flex items-center justify-center">
+                            <span className="text-blue-400 font-medium text-sm">1</span>
+                          </div>
+                          <h4 className="text-lg font-medium text-white">Extract mindmic.zip</h4>
+                        </div>
+                        <p className="text-gray-300 ml-11">
+                          Locate the downloaded file and double-click to extract it. This will directly create the Mindmic application file.
+                        </p>
+                      </div>
+
+                      {/* Step 2 */}
+                      <div className="space-y-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-blue-500/20 border border-blue-500/50 rounded-full flex items-center justify-center">
+                            <span className="text-blue-400 font-medium text-sm">2</span>
+                          </div>
+                          <h4 className="text-lg font-medium text-white">Open the app</h4>
+                        </div>
+                        <p className="text-gray-300 ml-11">
+                          Locate the extracted Mindmic application file and double-click to launch it.
+                        </p>
+                      </div>
+
+                      {/* Step 3 */}
+                      <div className="space-y-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-blue-500/20 border border-blue-500/50 rounded-full flex items-center justify-center">
+                            <span className="text-blue-400 font-medium text-sm">3</span>
+                          </div>
+                          <h4 className="text-lg font-medium text-white">See the security warning</h4>
+                        </div>
+                        <p className="text-gray-300 ml-11">
+                          macOS will show a security warning saying the app can't be opened because it's from an unidentified developer. This is normal and expected.
+                        </p>
+                        <div className="ml-11 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
+                          <p className="text-yellow-400 text-sm font-medium">• Expected Security Warning</p>
+                        </div>
+                      </div>
+
+                      {/* Step 4 */}
+                      <div className="space-y-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-blue-500/20 border border-blue-500/50 rounded-full flex items-center justify-center">
+                            <span className="text-blue-400 font-medium text-sm">4</span>
+                          </div>
+                          <h4 className="text-lg font-medium text-white">Go to System Settings</h4>
+                        </div>
+                        <p className="text-gray-300 ml-11">
+                          Open System Settings, then navigate to Privacy & Security.
+                        </p>
+                        <div className="ml-11 p-3 bg-gray-800/50 border border-gray-600/50 rounded-lg">
+                          <p className="text-gray-300 text-sm font-mono">System Settings → Privacy & Security</p>
+                        </div>
+                      </div>
+
+                      {/* Step 5 */}
+                      <div className="space-y-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-blue-500/20 border border-blue-500/50 rounded-full flex items-center justify-center">
+                            <span className="text-blue-400 font-medium text-sm">5</span>
+                          </div>
+                          <h4 className="text-lg font-medium text-white">Click "Open Anyway"</h4>
+                        </div>
+                        <p className="text-gray-300 ml-11">
+                          Scroll down to the bottom of the Privacy & Security section. You'll see a message about Mindmic being blocked with an "Open Anyway" button. Click this button.
+                        </p>
+                      </div>
+
+                      {/* Step 6 */}
+                      <div className="space-y-3">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-blue-500/20 border border-blue-500/50 rounded-full flex items-center justify-center">
+                            <span className="text-blue-400 font-medium text-sm">6</span>
+                          </div>
+                          <h4 className="text-lg font-medium text-white">Confirm and launch</h4>
+                        </div>
+                        <p className="text-gray-300 ml-11">
+                          A final confirmation dialog will appear. Click "Open" to complete the installation and launch Mindmic.
+                        </p>
+                      </div>
+
+                      {/* Success Message */}
+                      <div className="mt-8 p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
+                        <p className="text-green-400 font-medium text-center">✓ Installation Complete</p>
+                      </div>
+
+                      {/* Pro Tip Section */}
+                      <div className="mt-8 p-6 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+                        <h5 className="text-blue-400 font-semibold mb-2 flex items-center">
+                          <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                          </svg>
+                          Pro Tip
+                        </h5>
+                        <p className="text-gray-300">
+                          You only need to complete these security steps once. After the initial installation, Mindmic will launch normally without any additional approvals.
+                        </p>
+                      </div>
+
+                      {/* Why This Happens Section */}
+                      <div className="mt-6 p-6 bg-gray-800/50 border border-gray-600/50 rounded-lg">
+                        <h5 className="text-gray-200 font-semibold mb-2">Why This Happens</h5>
+                        <p className="text-gray-300">
+                          This security process protects you from potentially harmful software. Mindmic is safe to use, but since we're not (yet) in the Mac App Store, macOS requires this manual approval for your protection.
+                        </p>
+                      </div>
                     </div>
                   </TimelineContent>
                 </div>
