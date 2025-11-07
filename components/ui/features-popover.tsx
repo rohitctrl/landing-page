@@ -90,10 +90,7 @@ export function FeaturesPopover({
             <Button
               variant="outline"
               className="bg-white/5 border-white/10 text-gray-200 hover:bg-white/10"
-              onClick={() => {
-                onDownload?.();
-                onVideoClick?.();
-              }}
+              onClick={() => onDownload?.()}
             >
               And so much more →
             </Button>
