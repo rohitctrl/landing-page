@@ -176,13 +176,13 @@ const Navigation = React.memo(({ onPricingClick, onVideoClick, onDownload }: {
             <FeaturesPopover onDownload={onDownload} onVideoClick={onVideoClick} />
             <button
               onClick={onVideoClick}
-              className="text-sm text-white/60 hover:text-white transition-colors"
+              className="text-sm text-white/60 hover:text-white hover:shadow-lg hover:shadow-blue-500/20 active:shadow-md active:shadow-blue-500/10 transition-all duration-200 outline-none focus:outline-none"
             >
               How to Install
             </button>
             <button
               onClick={onPricingClick}
-              className="text-sm text-white/60 hover:text-white transition-colors"
+              className="text-sm text-white/60 hover:text-white hover:shadow-lg hover:shadow-blue-500/20 active:shadow-md active:shadow-blue-500/10 transition-all duration-200 outline-none focus:outline-none"
             >
               Pricing
             </button>
@@ -215,7 +215,7 @@ const Navigation = React.memo(({ onPricingClick, onVideoClick, onDownload }: {
               <FeaturesPopover onDownload={onDownload} onVideoClick={onVideoClick} />
             </div>
             <button
-              className="text-sm text-white/60 hover:text-white transition-colors py-2 text-left w-full"
+              className="text-sm text-white/60 hover:text-white hover:shadow-lg hover:shadow-blue-500/20 active:shadow-md active:shadow-blue-500/10 transition-all duration-200 py-2 text-left w-full outline-none focus:outline-none"
               onClick={() => {
                 setMobileMenuOpen(false);
                 onVideoClick();
@@ -224,7 +224,7 @@ const Navigation = React.memo(({ onPricingClick, onVideoClick, onDownload }: {
               How to Install
             </button>
             <button
-              className="text-sm text-white/60 hover:text-white transition-colors py-2 text-left w-full"
+              className="text-sm text-white/60 hover:text-white hover:shadow-lg hover:shadow-blue-500/20 active:shadow-md active:shadow-blue-500/10 transition-all duration-200 py-2 text-left w-full outline-none focus:outline-none"
               onClick={() => {
                 setMobileMenuOpen(false);
                 onPricingClick();
