@@ -397,7 +397,7 @@ export default function Component() {
 
   const handleDownload = () => {
     // Open the zip file download
-    window.open('/mindmic-ai-voice-transcription.zip', '_blank');
+    window.open('/mindmic.zip', '_blank');
 
     // Open the install popover after a short delay to ensure download starts
     setTimeout(() => {
