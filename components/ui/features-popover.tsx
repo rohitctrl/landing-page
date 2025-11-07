@@ -1,11 +1,23 @@
 "use client";
 
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Mic, Brain, Zap, Settings, FileText, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 
-export function FeaturesPopover() {
+interface FeaturesPopoverProps {
+  onDownload?: () => void;
+  onVideoClick?: () => void;
+}
+
+export function FeaturesPopover({
+  onDownload,
+  onVideoClick,
+}: FeaturesPopoverProps) {
   const features = [
     {
       icon: <Mic className="w-5 h-5 text-[#2596be]" />,
@@ -65,7 +77,9 @@ export function FeaturesPopover() {
               >
                 <div className="flex items-center gap-3 mb-1">
                   {f.icon}
-                  <h4 className="text-sm font-semibold text-white">{f.title}</h4>
+                  <h4 className="text-sm font-semibold text-white">
+                    {f.title}
+                  </h4>
                 </div>
                 <p className="text-xs text-gray-400">{f.desc}</p>
               </div>
@@ -76,9 +90,12 @@ export function FeaturesPopover() {
             <Button
               variant="outline"
               className="bg-white/5 border-white/10 text-gray-200 hover:bg-white/10"
-              onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() => {
+                onDownload?.();
+                onVideoClick?.();
+              }}
             >
-              View all features →
+              And so much more →
             </Button>
           </div>
         </motion.div>

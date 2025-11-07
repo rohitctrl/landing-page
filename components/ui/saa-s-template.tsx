@@ -172,7 +172,7 @@ const Navigation = React.memo(({ onPricingClick, onVideoClick, onDownload }: {
           </div>
 
           <div className="hidden md:flex items-center justify-center gap-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <FeaturesPopover />
+            <FeaturesPopover onDownload={onDownload} onVideoClick={onVideoClick} />
             <button
               onClick={onVideoClick}
               className="text-sm text-white/60 hover:text-white transition-colors"
@@ -211,7 +211,7 @@ const Navigation = React.memo(({ onPricingClick, onVideoClick, onDownload }: {
         <div className="md:hidden bg-black/95 backdrop-blur-md border-t border-gray-800/50 animate-[slideDown_0.3s_ease-out]">
           <div className="px-6 py-4 flex flex-col gap-4">
             <div onClick={() => setMobileMenuOpen(false)}>
-              <FeaturesPopover />
+              <FeaturesPopover onDownload={onDownload} onVideoClick={onVideoClick} />
             </div>
             <button
               className="text-sm text-white/60 hover:text-white transition-colors py-2 text-left w-full"
