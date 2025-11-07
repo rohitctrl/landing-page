@@ -6,6 +6,7 @@ import PricingPopover from "./pricing-popover";
 import VideoPopover from "./video-popover";
 import { FeaturesPopover } from "./features-popover";
 import { DownloadConfirmationDialog } from "./download-confirmation-dialog";
+import Footer from "./footer";
 
 // Inline Button Component
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -428,6 +429,7 @@ export default function Component() {
         onClose={() => setShowDownloadConfirm(false)}
         onConfirm={handleConfirmDownload}
       />
+      <Footer />
     </main>
   );
 }
