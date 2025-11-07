@@ -54,7 +54,7 @@ export function FeaturesPopover({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="text-gray-300 hover:text-white transition font-medium">
+        <button className="text-sm text-white/60 hover:text-white hover:shadow-lg hover:shadow-blue-500/20 active:shadow-md active:shadow-blue-500/10 transition-all duration-200 outline-none focus:outline-none">
           Features
         </button>
       </PopoverTrigger>
@@ -81,7 +81,7 @@ export function FeaturesPopover({
                     {f.title}
                   </h4>
                 </div>
-                <p className="text-xs text-gray-400">{f.desc}</p>
+                <p className="text-xs" style={{ color: "#999" }}>{f.desc}</p>
               </div>
             ))}
           </div>
